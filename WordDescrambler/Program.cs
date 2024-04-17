@@ -33,6 +33,10 @@ foreach (string combination in combinations)
     }
 }
 
+// Keep the console window open until user is finished
+Console.WriteLine("Press any key to exit...");
+Console.ReadKey();
+
 static HashSet<string> readWordListFile(string filePath)
 {
     HashSet<string> wordList = new HashSet<string>();
