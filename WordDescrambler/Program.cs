@@ -2,21 +2,23 @@
 using System.Text.RegularExpressions;
 
 // get scrambled word and validate input
-String scrambledWord;
+String scrambledWord = "";
 do
 {
-    //TODO: Add try-catch
-    Console.Write("Please enter a scrambled word: ");
-    scrambledWord = Console.ReadLine();
+    try
+    {
+        Console.Write("Please enter a scrambled word: ");
+        scrambledWord = Console.ReadLine();
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Error while reading user input: " + e.Message);
+    }
 
 } while (!isStringOnlyLetters(scrambledWord));
 
 // Generate all possible combinations of letters
 HashSet<string> combinations = getCombinationsOfLetters("", scrambledWord);
-foreach (string word in combinations)
-{
-    Console.WriteLine(word);
-}
 
 // Read word List file
 HashSet<string> wordList = readWordListFile("1000-most-common-words.txt");
