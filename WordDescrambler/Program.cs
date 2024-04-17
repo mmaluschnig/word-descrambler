@@ -1,4 +1,5 @@
 ﻿// Word Descrambler
+using System.Collections;
 using System.Text.RegularExpressions;
 
 
@@ -13,8 +14,33 @@ do
 
 } while (!isStringOnlyLetters(scrambledWord));
 
-
 Console.WriteLine($"Scrambled word is: {scrambledWord}.");
+
+// Generate all possible combinations of letters
+foreach (string word in getCombinationsOfLetters(scrambledWord))
+{
+    Console.WriteLine(word);
+}
+
+static ArrayList getCombinationsOfLetters(String s)
+{
+    ArrayList combinations = [s];
+
+    //Exit condition
+    if (s.Length <= 1)
+    {
+        return combinations;
+    }
+
+    // itterate through each letter of string
+    for (int i = 0; i < s.Length; i++)
+    {
+        string remainingLetters = s.Remove(i, 1);
+        // recursively add substring letters
+        combinations.AddRange(getCombinationsOfLetters(remainingLetters));
+    }
+    return combinations;
+}
 
 static bool isStringOnlyLetters(string s)
 {
