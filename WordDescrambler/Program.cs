@@ -1,21 +1,15 @@
 ﻿// Word Descrambler
-using System.Collections;
 using System.Text.RegularExpressions;
 
-
 // get scrambled word and validate input
-
 String scrambledWord;
 do
 {
     //TODO: Add try-catch
-    Console.Write("Please enter a scrambled word:");
+    Console.Write("Please enter a scrambled word: ");
     scrambledWord = Console.ReadLine();
 
 } while (!isStringOnlyLetters(scrambledWord));
-
-Console.WriteLine($"Scrambled word is: {scrambledWord}.");
-
 
 // Generate all possible combinations of letters
 HashSet<string> combinations = getCombinationsOfLetters("", scrambledWord);
@@ -24,11 +18,17 @@ foreach (string word in combinations)
     Console.WriteLine(word);
 }
 
-// Compare with text file
+// Read word List file
 HashSet<string> wordList = readWordListFile("1000-most-common-words.txt");
-foreach (string word in wordList)
+
+// Compare scrambled combinations to wordlist
+Console.WriteLine($"English words from the letters in '{scrambledWord}' are:");
+foreach (string combination in combinations)
 {
-    Console.Write(word + ", ");
+    if (wordList.Contains(combination.ToLower()))
+    {
+        Console.WriteLine(combination);
+    }
 }
 
 static HashSet<string> readWordListFile(string filePath)
