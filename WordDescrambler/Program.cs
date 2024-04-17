@@ -24,6 +24,33 @@ foreach (string word in combinations)
     Console.WriteLine(word);
 }
 
+// Compare with text file
+HashSet<string> wordList = readWordListFile("1000-most-common-words.txt");
+foreach (string word in wordList)
+{
+    Console.Write(word + ", ");
+}
+
+static HashSet<string> readWordListFile(string filePath)
+{
+    HashSet<string> wordList = new HashSet<string>();
+
+    try
+    {
+        var words = File.ReadLines(filePath);
+        foreach (var word in words)
+        {
+            // Ensure wordlist is always lower case
+            wordList.Add(word.ToLower());
+        }
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Error while reading the file: " + e.Message);
+    }
+    return wordList;
+}
+
 static HashSet<string> getCombinationsOfLetters(string prefix, string s)
 {
     HashSet<string> combinations = new HashSet<string>();
