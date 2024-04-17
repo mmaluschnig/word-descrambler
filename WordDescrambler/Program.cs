@@ -21,7 +21,7 @@ do
 HashSet<string> combinations = getCombinationsOfLetters("", scrambledWord);
 
 // Read word List file
-HashSet<string> wordList = readWordListFile("1000-most-common-words.txt");
+HashSet<string> wordList = readWordListFile(@"resources\1000-most-common-words.txt");
 
 // Compare scrambled combinations to wordlist
 Console.WriteLine($"English words from the letters in '{scrambledWord}' are:");
