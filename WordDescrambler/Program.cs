@@ -25,16 +25,16 @@ foreach (string word in getCombinationsOfLetters("", scrambledWord))
 
 static ArrayList getCombinationsOfLetters(string prefix, string s)
 {
-    ArrayList combinations = [s];
+    ArrayList combinations = new ArrayList();
 
     //Exit condition
-    if (s.Length <= 1)
+    if (s.Length < 1)
     {
+        combinations.Add(prefix + s);
         return combinations;
     }
 
     combinations.Add(prefix + s);
-
 
     // itterate through each letter of string
     for (int i = 0; i < s.Length; i++)
