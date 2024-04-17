@@ -16,16 +16,17 @@ do
 
 Console.WriteLine($"Scrambled word is: {scrambledWord}.");
 
-// Generate all possible combinations of letters
 
-foreach (string word in getCombinationsOfLetters("", scrambledWord))
+// Generate all possible combinations of letters
+HashSet<string> combinations = getCombinationsOfLetters("", scrambledWord);
+foreach (string word in combinations)
 {
     Console.WriteLine(word);
 }
 
-static ArrayList getCombinationsOfLetters(string prefix, string s)
+static HashSet<string> getCombinationsOfLetters(string prefix, string s)
 {
-    ArrayList combinations = new ArrayList();
+    HashSet<string> combinations = new HashSet<string>();
 
     //Exit condition
     if (s.Length < 1)
@@ -42,7 +43,7 @@ static ArrayList getCombinationsOfLetters(string prefix, string s)
         string letter = s.Substring(i, 1);
         string remainingLetters = s.Remove(i, 1);
         // recursively add substring letters
-        combinations.AddRange(getCombinationsOfLetters(letter, remainingLetters));
+        combinations.UnionWith(getCombinationsOfLetters(letter, remainingLetters));
     }
     return combinations;
 }
