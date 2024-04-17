@@ -53,26 +53,24 @@ static HashSet<string> readWordListFile(string filePath)
     return wordList;
 }
 
-static HashSet<string> getCombinationsOfLetters(string prefix, string s)
+static HashSet<string> getCombinationsOfLetters(string currentCombination, string remaining)
 {
     HashSet<string> combinations = new HashSet<string>();
+    combinations.Add(currentCombination);
 
     //Exit condition
-    if (s.Length < 1)
+    if (remaining.Length < 1)
     {
-        combinations.Add(prefix + s);
         return combinations;
     }
 
-    combinations.Add(prefix + s);
-
     // itterate through each letter of string
-    for (int i = 0; i < s.Length; i++)
+    for (int i = 0; i < remaining.Length; i++)
     {
-        string letter = s.Substring(i, 1);
-        string remainingLetters = s.Remove(i, 1);
+        string letter = remaining.Substring(i, 1);
+        string newRemaining = remaining.Remove(i, 1);
         // recursively add substring letters
-        combinations.UnionWith(getCombinationsOfLetters(letter, remainingLetters));
+        combinations.UnionWith(getCombinationsOfLetters(currentCombination + letter, newRemaining));
     }
     return combinations;
 }
